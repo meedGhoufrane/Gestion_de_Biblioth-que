@@ -1,5 +1,7 @@
-const Footer = () => {
-    return(
+import React from 'react';
+
+const Footer: React.FC = () => {
+    return (
         <footer className="bj_footer_area_two bj_footer_area_four" data-bg-color="#212833">
             <div className="container">
                 <div className="footer_top">
@@ -78,7 +80,7 @@ const Footer = () => {
                     <p>© 2024 Bookjar. All Rights Reserved</p>
                 </div>
             </div>
-        </footer>    
+        </footer> 
     );
 };
 

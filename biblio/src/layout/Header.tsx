@@ -1,11 +1,23 @@
-const Header = () => {
+import React from 'react';
+import { useAuth } from "react-oidc-context";
+
+
+const Header: React.FC = () => {
+    const auth = useAuth();
+
+    const signOutRedirect = () => {
+        const clientId = "mm0d3de70f9ju19tvaihoa9f4";
+        const logoutUri = "<logout uri>";
+        const cognitoDomain = "https://us-east-11pw3pmere.auth.us-east-1.amazoncognito.com";
+        window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    };
     return (
-        <header className="header_area">
+        <header className="header_area header_relative header_blue">
             <nav className="navbar navbar-expand-lg menu_one menu_white" id="header">
                 <div className="container">
                     <a className="navbar-brand sticky_logo" href="index.html">
-                        <img src="/assets/img/home/logo-white.svg" alt="logo" />
-                        <img src="/assets/img/home-two/logo-dark.svg" alt="logo" />
+                        <img src="assets/img/home/logo-white.svg" alt="logo" />
+                        <img src="assets/img/home-two/logo-dark.svg" alt="logo" />
                     </a>
                     <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="menu_toggle">
@@ -22,12 +34,12 @@ const Header = () => {
                     </button>
                     <div className="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                         <ul className="navbar-nav menu w_menu ms-auto me-auto">
-                            <li className="nav-item dropdown submenu">
+                            <li className="nav-item dropdown submenu active">
                                 <a className="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     HOME
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li className="nav-item">
+                                    <li className="nav-item active">
                                         <a href="index.html" className="nav-link">Home One</a>
                                     </li>
                                     <li className="nav-item">
@@ -166,7 +178,7 @@ const Header = () => {
                                     </li>
                                 </ul>
                             </li>
-                            <li className="nav-item dropdown submenu mega_menu tab-demo active">
+                            <li className="nav-item dropdown submenu mega_menu tab-demo">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore
                                 </a>
                                 <ul className="dropdown-menu sub">
@@ -174,10 +186,10 @@ const Header = () => {
                                         <div className="row">
                                             <div className="col-lg-5 tabHeader">
                                                 <ul className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                    <li className="nav-item">
+                                                    <li className="nav-item active">
                                                         <a className="nav-link" id="v-pills-tour-tab" data-toggle="pill" href="#v-pills-tour" role="tab" aria-controls="v-pills-tour" aria-selected="false">Utility Pages</a>
                                                     </li>
-                                                    <li className="nav-item active">
+                                                    <li className="nav-item">
                                                         <a className="nav-link" id="v-others-menu-tab" data-toggle="pill" href="#v-others-menu" role="tab" aria-controls="v-others-menu" aria-selected="false">Company</a>
                                                     </li>
                                                     <li className="nav-item">
@@ -193,7 +205,7 @@ const Header = () => {
                                             </div>
                                             <div className="col-lg-7">
                                                 <div className="tab-content tabContent" id="v-pills-tabContent">
-                                                    <div className="tab-pane fade" id="v-pills-tour" role="tabpanel" aria-labelledby="v-pills-tour-tab">
+                                                    <div className="tab-pane fade active show" id="v-pills-tour" role="tabpanel" aria-labelledby="v-pills-tour-tab">
                                                         <div className="d-flex">
                                                             <ul className="list-unstyled tab_list w_100">
                                                                 <li>
@@ -216,11 +228,11 @@ const Header = () => {
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div className="tab-pane fade active show" id="v-others-menu" role="tabpanel" aria-labelledby="v-others-menu-tab">
+                                                    <div className="tab-pane fade" id="v-others-menu" role="tabpanel" aria-labelledby="v-others-menu-tab">
                                                         <div className="d-flex">
                                                             <ul className="list-unstyled tab_list w_100">
                                                                 <li>
-                                                                    <a className="active" href="book-listing.html">Book Listing</a>
+                                                                    <a href="book-listing.html">Book Listing</a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="about.html">About</a>
@@ -373,64 +385,80 @@ const Header = () => {
                                 </ul>
                             </li>
                         </ul>
+
                         <div className="alter_nav">
                             <ul className="navbar-nav search_cart menu">
-                                <li className="nav-item search"><a className="nav-link search-btn" href="javascript:void(0);"><i className="ti-search"></i></a>
+                                <li className="nav-item search">
+                                    <a className="nav-link search-btn" href="javascript:void(0);"><i className="icon-search"></i></a>
                                     <form action="#" method="get" className="menu-search-form">
                                         <div className="input-group">
                                             <input type="search" className="form-control" placeholder="Search here.." />
-                                            <button type="submit"><i className="ti-arrow-right"></i></button>
+                                            <button type="submit">
+                                                <i className="ti-arrow-right"></i>
+                                            </button>
                                         </div>
                                     </form>
                                 </li>
                                 <li className="nav-item shpping-cart dropdown submenu">
-                                    <a className="cart-btn nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="ti-shopping-cart"></i><span className="num total-cart-count">2</span></a>
-                                    <div className="dropdown-menu">
-                                        <ul className="cart-dropdown list-unstyled">
-                                            <li className="cart-single-item clearfix">
-                                                <div className="cart-img">
-                                                    <img src="/assets/img/cart1.jpg" alt="styler" />
-                                                </div>
-                                                <div className="cart-content text-left">
-                                                    <p className="cart-title"><a href="#">Pale pink and black buttoned
-                                                        dress</a>
-                                                    </p>
-                                                    <p><del>$400.00</del> - $350.00</p>
-                                                </div>
-                                                <div className="cart-remove">
-                                                    <a href="#" className="action"><span className="ti-close"></span></a>
-                                                </div>
-                                            </li>
-                                            <li className="cart-single-item clearfix">
-                                                <div className="cart-img">
-                                                    <img src="/assets/img/cart1.jpg" alt="styler" />
-                                                </div>
-                                                <div className="cart-content text-left">
-                                                    <p className="cart-title"><a href="#">Vera bradley lug- gage large
+                                    <a className="cart-btn nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i className="icon-shopping-basket"></i><span className="num">2</span></a>
+                                    <ul className="dropdown-menu">
+                                        <li className="cart-single-item clearfix">
+                                            <div className="cart-img">
+                                                <img src="assets/img/cart1.jpg" alt="styler" />
+                                            </div>
+                                            <div className="cart-content text-left">
+                                                <p className="cart-title">
+                                                    <a href="product-single.html">Pale pink and black buttoned dress</a>
+                                                </p>
+                                                <p><del>$400.00</del> - $350.00</p>
+                                            </div>
+                                            <div className="cart-remove">
+                                                <a href="#" className="action"><span className="ti-close"></span></a>
+                                            </div>
+                                        </li>
+                                        <li className="cart-single-item clearfix">
+                                            <div className="cart-img">
+                                                <img src="assets/img/cart1.jpg" alt="styler" />
+                                            </div>
+                                            <div className="cart-content text-left">
+                                                <p className="cart-title">
+                                                    <a href="product-single.html">Vera bradley lug- gage large
                                                         duffel</a>
-                                                    </p>
-                                                    <p>$350.00</p>
-                                                </div>
-                                                <div className="cart-remove">
-                                                    <a href="#" className="action"><span className="ti-close"></span></a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div className="cart_f">
+                                                </p>
+                                                <p>$350.00</p>
+                                            </div>
+                                            <div className="cart-remove">
+                                                <a href="#" className="action"><span className="ti-close"></span></a>
+                                            </div>
+                                        </li>
+                                        <li className="cart_f">
                                             <div className="cart-pricing">
-                                                <p className="total">Subtotal :<span className="p-total text-end">$<span className="total-cart-amount"></span></span>
+                                                <p className="total">
+                                                    Subtotal :<span className="p-total text-end">$358.00</span>
                                                 </p>
                                             </div>
                                             <div className="cart-button text-center">
                                                 <a href="cart.html" className="btn btn-cart get_btn pink">View Cart</a>
                                                 <a href="checkout.html" className="btn btn-cart get_btn dark">Checkout</a>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li className="nav-item user ms-3">
+                                    {auth.isAuthenticated ? (
+                                        <a className="nav-link" href="my-account.html"><i className="icon-user"></i></a>
+                                    ) : (
+                                        <button
+                                            onClick={() => auth.signinRedirect()}
+                                            className="btn-primary flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200"
+                                        >
+                                            <i className="fas fa-sign-in-alt mr-2"></i> Sign in
+                                        </button>
+                                    )}
                                 </li>
                             </ul>
                         </div>
-                        <a className="bj_theme_btn strock_btn hidden-sm hidden-xs" href="login.html"><i className="fa-regular fa-user"></i>Login</a>
                     </div>
                 </div>
             </nav>
@@ -438,4 +466,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Header; 
