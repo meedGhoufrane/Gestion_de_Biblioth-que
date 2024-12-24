@@ -1,21 +1,26 @@
 import React from 'react';
 import { useAuth } from "react-oidc-context";
-
+import { useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
     const auth = useAuth();
+    const navigate = useNavigate();
 
     const signOutRedirect = () => {
         const clientId = "mm0d3de70f9ju19tvaihoa9f4";
         const logoutUri = "<logout uri>";
         const cognitoDomain = "https://us-east-11pw3pmere.auth.us-east-1.amazoncognito.com";
+
+        localStorage.clear();
+
         window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
     };
+
     return (
         <header className="header_area header_relative header_blue">
             <nav className="navbar navbar-expand-lg menu_one menu_white" id="header">
                 <div className="container">
-                    <a className="navbar-brand sticky_logo" href="index.html">
+                    <a className="navbar-brand sticky_logo" onClick={() => navigate("/home")}>
                         <img src="assets/img/home/logo-white.svg" alt="logo" />
                         <img src="assets/img/home-two/logo-dark.svg" alt="logo" />
                     </a>
@@ -112,10 +117,6 @@ const Header: React.FC = () => {
                                 </a>
 
                                 <ul className="dropdown-menu">
-                                    <li className="nav-item">
-                                        <a href="my-account.html" className="nav-link">User Profile</a>
-                                    </li>
-
                                     <li className="nav-item dropdown submenu">
                                         <a className="nav-link dropdown-toggle" href="my-orders.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Orders
@@ -143,10 +144,10 @@ const Header: React.FC = () => {
                                         </a>
                                         <ul className="dropdown-menu">
                                             <li className="nav-item">
-                                                <a href="my-list.html" className="nav-link">Book List</a>
+                                                <a className="nav-link" onClick={() => navigate("/BookList")}>Book List</a>
                                             </li>
                                             <li className="nav-item">
-                                                <a href="my-list-details.html" className="nav-link">Book List Details</a>
+                                                <a className="nav-link" onClick={() => navigate("/my-list-details")}>Book List Details</a>
                                             </li>
                                             <li className="nav-item">
                                                 <a href="my-list-create.html" className="nav-link">Create Book List</a>
@@ -447,13 +448,14 @@ const Header: React.FC = () => {
                                 </li>
                                 <li className="nav-item user ms-3">
                                     {auth.isAuthenticated ? (
-                                        <a className="nav-link" href="my-account.html"><i className="icon-user"></i></a>
+                                        <a className="nav-link" onClick={() => navigate("/profile")}>
+                                            <i className="icon-user"></i>
+                                        </a>
+
                                     ) : (
                                         <button
                                             onClick={() => auth.signinRedirect()}
-                                            className="btn-primary flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200"
-                                        >
-                                            <i className="fas fa-sign-in-alt mr-2"></i> Sign in
+                                            className="bj_theme_btn strock_btn hidden-sm hidden-xs"><i className="fa-regular fa-user"></i>Login
                                         </button>
                                     )}
                                 </li>
