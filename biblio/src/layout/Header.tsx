@@ -16,6 +16,7 @@ const Header: React.FC = () => {
         window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
     };
 
+    const usergroup = auth?.user?.profile['cognito:groups'][0] === "admin";
     return (
         <header className="header_area header_relative header_blue">
             <nav className="navbar navbar-expand-lg menu_one menu_white" id="header">
@@ -111,74 +112,78 @@ const Header: React.FC = () => {
                                     </li>
                                 </ul>
                             </li>
-                            <li className="nav-item dropdown submenu">
-                                <a className="nav-link dropdown-toggle" href="my-account.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dashboard
-                                </a>
 
-                                <ul className="dropdown-menu">
-                                    <li className="nav-item dropdown submenu">
-                                        <a className="nav-link dropdown-toggle" href="my-orders.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Orders
-                                        </a>
-                                        <ul className="dropdown-menu">
-                                            <li className="nav-item">
-                                                <a href="my-orders.html" className="nav-link">Orders</a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a href="order-track.html" className="nav-link">Order Tracking</a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a href="order-confrmation.html" className="nav-link">Thank You Page</a>
-                                            </li>
-                                        </ul>
-                                    </li>
 
-                                    <li className="nav-item">
-                                        <a href="my-ebook-library.html" className="nav-link">Ebook Library</a>
-                                    </li>
+                            {usergroup && (
+                                <li className="nav-item dropdown submenu">
+                                    <a className="nav-link dropdown-toggle" href="my-account.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dashboard
+                                    </a>
 
-                                    <li className="nav-item dropdown submenu">
-                                        <a className="nav-link dropdown-toggle" href="my-list.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Book List
-                                        </a>
-                                        <ul className="dropdown-menu">
-                                            <li className="nav-item">
-                                                <a className="nav-link" onClick={() => navigate("/BookList")}>Book List</a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" onClick={() => navigate("/my-list-details")}>Book List Details</a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a href="my-list-create.html" className="nav-link">Create Book List</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li className="nav-item dropdown submenu">
-                                        <a className="nav-link dropdown-toggle" href="my-address.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Address Book
-                                        </a>
-                                        <ul className="dropdown-menu">
-                                            <li className="nav-item">
-                                                <a href="my-address.html" className="nav-link">Address Book</a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a href="add-new-address.html" className="nav-link">Add New Address</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    <ul className="dropdown-menu">
+                                        <li className="nav-item dropdown submenu">
+                                            <a className="nav-link dropdown-toggle" href="my-orders.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Orders
+                                            </a>
+                                            <ul className="dropdown-menu">
+                                                <li className="nav-item">
+                                                    <a href="my-orders.html" className="nav-link">Orders</a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a href="order-track.html" className="nav-link">Order Tracking</a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a href="order-confrmation.html" className="nav-link">Thank You Page</a>
+                                                </li>
+                                            </ul>
+                                        </li>
 
-                                    <li className="nav-item">
-                                        <a href="my-following-authors.html" className="nav-link">Following Authors</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="my-rating-reviews.html" className="nav-link">Rating & Reviews</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="my-wishlist.html" className="nav-link">Wishlist</a>
-                                    </li>
-                                </ul>
-                            </li>
+                                        <li className="nav-item">
+                                            <a href="my-ebook-library.html" className="nav-link">Ebook Library</a>
+                                        </li>
+
+                                        <li className="nav-item dropdown submenu">
+                                            <a className="nav-link dropdown-toggle" href="my-list.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Book List
+                                            </a>
+                                            <ul className="dropdown-menu">
+                                                <li className="nav-item">
+                                                    <a className="nav-link" onClick={() => navigate("/BookList")}>Book List</a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a className="nav-link" onClick={() => navigate("/my-list-details")}>Book List Details</a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a href="my-list-create.html" className="nav-link">Create Book List</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li className="nav-item dropdown submenu">
+                                            <a className="nav-link dropdown-toggle" href="my-address.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Address Book
+                                            </a>
+                                            <ul className="dropdown-menu">
+                                                <li className="nav-item">
+                                                    <a href="my-address.html" className="nav-link">Address Book</a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a href="add-new-address.html" className="nav-link">Add New Address</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li className="nav-item">
+                                            <a href="my-following-authors.html" className="nav-link">Following Authors</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a href="my-rating-reviews.html" className="nav-link">Rating & Reviews</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a href="my-wishlist.html" className="nav-link">Wishlist</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            )}
                             <li className="nav-item dropdown submenu mega_menu tab-demo">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore
                                 </a>
