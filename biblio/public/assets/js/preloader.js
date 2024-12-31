@@ -11,10 +11,12 @@
   $("#preloader").addClass("loading");
 
   $(window).on("load", function () {
-    setTimeout(function () {
-      $("#preloader").fadeOut(500, function () {
-        $("#preloader").removeClass("loading");
-      });
-    }, 500);
+    $("#preloader").fadeOut(500, function () {
+      $(this).remove();
+    });
+  });
+
+  $(document).on("click", "a", function () {
+    $("#preloader").fadeIn(500);
   });
 })(jQuery);
