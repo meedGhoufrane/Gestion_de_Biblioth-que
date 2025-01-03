@@ -5,18 +5,21 @@ import { useNavigate } from "react-router-dom";
 const Header: React.FC = () => {
     const auth = useAuth();
     const navigate = useNavigate();
+    
 
-    const signOutRedirect = () => {
-        const clientId = "mm0d3de70f9ju19tvaihoa9f4";
-        const logoutUri = "<logout uri>";
-        const cognitoDomain = "https://us-east-11pw3pmere.auth.us-east-1.amazoncognito.com";
+    // const signOutRedirect = () => {
+    //     const clientId = "mm0d3de70f9ju19tvaihoa9f4";
+    //     const logoutUri = "<logout uri>";
+    //     const cognitoDomain = "https://us-east-11pw3pmere.auth.us-east-1.amazoncognito.com";
 
-        localStorage.clear();
+    //     localStorage.clear();
 
-        window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-    };
+    //     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    // };
 
     const usergroup = auth?.user?.profile['cognito:groups'][0] === "admin";
+    console.log(auth);
+
     return (
         <header className="header_area header_relative header_blue">
             <nav className="navbar navbar-expand-lg menu_one menu_white" id="header">
