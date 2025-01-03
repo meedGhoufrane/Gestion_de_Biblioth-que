@@ -5,6 +5,7 @@ import BookingBook from './pages/bookingbook';
 import MyListDetails from './components/dashbaord/MyListDetails';
 import BookList from './components/dashbaord/BookList';
 import CreateBookList from './components/dashbaord/CreateBookList';
+import UpdateBookList from './components/dashbaord/UpdateBookList';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/booklist" element={<BookList />} />
       <Route path="/my-list-details" element={<MyListDetails />} />
       <Route path="/CreateBookList" element={<CreateBookList />} />
+      <Route path="/update-book/:bookId" element={<UpdateBookList />} />
       
       <Route
         path="/profile"

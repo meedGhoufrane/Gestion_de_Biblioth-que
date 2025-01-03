@@ -19,6 +19,7 @@ const AccountDashboardSidebar: React.FC = () => {
             <li><Link to="/profile">My Profile</Link></li>
             <li className="active"><Link to="/BookList">My List</Link></li>
             <li><Link to="/my-list-details">My List Details</Link></li>
+            <li><Link to="/my-list-details">My List Details</Link></li>
           </ul>
         </div>
       </div>

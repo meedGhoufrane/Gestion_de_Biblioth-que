@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from "react-oidc-context";
+
 
 const Books: React.FC = () => {
     const [books, setBooks] = useState<any[]>([]);
-
+    const [loading, setLoading] = useState(false);
+    const auth = useAuth();
+    
     useEffect(() => {
-        const fetchBooks = async () => {
+        fetchBooks();
+    }, []);
+
+
+    
+    const fetchBooks = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/books');
                 setBooks(response.data);
@@ -14,8 +23,26 @@ const Books: React.FC = () => {
             }
         };
 
-        fetchBooks();
-    }, []);
+    const handleBooking = async (bookId: string) => {
+        try {
+            setLoading(true);
+            const userId = auth?.user?.profile.sub;
+            const bookingData = {
+                userId,
+                bookId,
+                status: 'ACTIVE'
+            };
+            await axios.post('http://localhost:3000/bookings/create', bookingData);
+            alert('Book booked successfully!');
+
+            await fetchBooks();
+        } catch (error) {
+            console.error('Error booking book:', error);
+            alert('Failed to book the book. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="col-lg-9">
@@ -56,8 +83,15 @@ const Books: React.FC = () => {
                                     <span data-bs-toggle="tooltip" data-bs-placement="right" title="Quickview"><button className="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i className="arrow_move"></i></button></span>
                                     <a className="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Compare"><i className="ti-control-shuffle"></i></a>
                                 </div>
-                                <button type="button" className="bj_theme_btn add-to-cart-automated" data-name={book.title} data-img="assets/img/home-two/choice3.jpg" data-price={book.price} data-mrp={book.totalPrice}>
-                                    <i className="icon_cart_alt"></i>Add To Cart
+                                <button
+                                    type="button"
+                                    className="bj_theme_btn add-to-cart-automated"
+                                    onClick={() => handleBooking(book.id)}
+                                    disabled={loading || book.availableCopies <= 0}
+                                >
+                                    <i className="icon_cart_alt"></i>
+                                    {loading ? 'Processing...' :
+                                        book.availableCopies <= 0 ? 'Not Available' : 'Book Now'}
                                 </button>
                             </div>
                             <div className="bj_new_pr_content">
