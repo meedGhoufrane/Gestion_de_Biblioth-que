@@ -74,19 +74,19 @@ The project is structured around three main services and DevOps infrastructure:
 ## 📝 API Endpoints
 
 ### Authentication Service
-```http
+```js
 POST /auth/signup - Register new user
 POST /auth/login - User login
 GET /auth/me - Get user profile
 ```
 🚀 Quick Start
-```http
+```js
 git clone https://github.com/yourusername/Gestion_de_Bibliotheque.git
 cd Gestion_de_Bibliotheque
 ```
 Install Dependencies
 
-```http
+```js
 cd auth-service
 npm install
 cp .env.example .env # Configure env variables
@@ -95,7 +95,7 @@ cp .env.example .env # Configure env variables
 Book Service
 
 
-```http
+```js
 cd ../book-service
 npm install
 cp .env.example .env # Configure env variables
@@ -103,7 +103,7 @@ cp .env.example .env # Configure env variables
 Frontend
 
 
-```http
+```js
 cd ../frontend
 npm install
 cp .env.example .env # Configure env variables
